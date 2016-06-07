@@ -1,10 +1,14 @@
 angular.module('app', [])
 .controller('mainCtrl',mainCtrl);
 
-function mainCtrl () {
+function mainCtrl ($scope,socketFactory) {
 	 var vm = this;
 
 	 vm.notes = [];
+
+	 socketFactory.on('onNoteCreated', function(data) {
+		$scope.notes.push(data);
+	});
 
 	 vm.createNote = function () {
 	 	 var note = {
@@ -14,7 +18,10 @@ function mainCtrl () {
 	 	 }
 
 	 	 vm.notes.push(note);
+	 	 socketFactory.emit('createNote',note);
 	 }
 
-	 
+mainCtrl.$inject = ['$scope', 'socketFactory'];
+
 }
+
