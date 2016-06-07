@@ -1,0 +1,15 @@
+.sticky-note {
+	position: absolute;
+}
+
+.sticky-note .title {
+	border: none;
+	display: block;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.sticky-note .body {
+	border: none;
+	display: block;
+}
