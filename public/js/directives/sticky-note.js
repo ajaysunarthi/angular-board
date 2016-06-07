@@ -1,20 +1,22 @@
 angular.module('app').
-directive('stickyNote',  function(socketFactory){
-	// Runs during compile
-	return {
-		scope: {}, 
-	    //controller: controller,
-		restrict: 'A', 
-		link: link	
-	};
+directive('stickyNote', stickyNote);
 
-	function link(scope,element,attrs) {
-		  element.draggable();
-	}
+function stickyNote(socketFactory) {
+    // Runs during compile
+    return {
+        scope: {},
+        //controller: controller,
+        restrict: 'A',
+        link: link
+    };
 
-	function controller() {
-		  
-	}
+    function link(scope, element, attrs) {
+        element.draggable();
+    }
+
+    // function controller() {
+
+    // }
 
 
-});
+}

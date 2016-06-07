@@ -1,3 +1,7 @@
+body{
+	background:brown;
+}
+
 .sticky-note {
 	position: absolute;
 }
@@ -12,4 +16,6 @@
 .sticky-note .body {
 	border: none;
 	display: block;
+	margin-top: 5px;
 }
+
