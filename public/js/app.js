@@ -6,9 +6,14 @@ function mainCtrl ($scope,socketFactory) {
 
 	 vm.notes = [];
 
+	 // this is incoming
 	 socketFactory.on('onNoteCreated', function(data) {
-		$scope.notes.push(data);
+		vm.notes.push(data);
 	});
+
+	socketFactory.on('onNoteDeleted', function(data) {
+		vm.handleDeletedNote(data.id);
+	}); 
 
 	 vm.createNote = function () {
 	 	 var note = {
@@ -19,6 +24,23 @@ function mainCtrl ($scope,socketFactory) {
 
 	 	 vm.notes.push(note);
 	 	 socketFactory.emit('createNote',note);
+	 }
+
+	 vm.deleteNote = function (id) {
+	 	vm.handleDeletedNote(id);
+	 	socketFactory.emit('deleteNote',{id:id});	 
+	 }
+
+	 vm.handleDeletedNote = function (id) {
+	 	 var allNotes = vm.notes,
+	 	 newNotes = [];
+
+	 	 angular.forEach(allNotes,function (note) {
+	 	 	 if (note.id !== id) {
+	 	 	 	newNotes.push(note); 
+	 	 	 }
+	 	 });
+	 	 vm.notes = newNotes;
 	 }
 
 mainCtrl.$inject = ['$scope', 'socketFactory'];

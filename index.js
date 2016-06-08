@@ -11,6 +11,10 @@ io.on('connection', function(socket) {
 		 socket.broadcast.emit('onNoteCreated',data); 
 	});
 
+	socket.on('deleteNote',function (data) {
+		 socket.broadcast.emit('onNoteDeleted',data);
+	})
+
 });
 
 http.listen(3000, function() {
