@@ -17,11 +17,29 @@ function stickyNote(socketFactory) {
     };
 
     function link(scope, element, attrs, ctrl) {
-        element.draggable();
-//        console.log(scope.note); // undefined
-//        console.log(scope.fuck); // undefined
-        // console.log(scope.vm.note);
-        // console.log(scope.vm.fuck);
+        element.draggable({
+            stop:function (event,ui) {
+                 socketFactory.emit('moveNote',{
+                    id:scope.vm.note.id,
+                    x:ui.position.left,
+                    y:ui.position.top
+                 }); 
+            }
+        });
+
+        socketFactory.on('onNoteMoved',function (data) {
+           if(data.id == scope.vm.note.id) {
+                    element.animate({
+                        left: data.x,
+                        top: data.y
+                    });
+                }  
+        });
+
+        element.css('left', '10px');
+            element.css('top', '50px');
+            element.hide().fadeIn(1000);
+
 
     }
 

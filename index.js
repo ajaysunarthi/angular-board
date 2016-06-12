@@ -17,7 +17,12 @@ io.on('connection', function(socket) {
 
 	socket.on('deleteNote',function (data) {
 		 socket.broadcast.emit('onNoteDeleted',data);
-	})
+	});
+
+	socket.on('moveNote', function(data){
+		socket.broadcast.emit('onNoteMoved', data);
+	});
+	
 
 });
 
