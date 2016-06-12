@@ -11,12 +11,16 @@ io.on('connection', function(socket) {
 		 socket.broadcast.emit('onNoteCreated',data); 
 	});
 
+	socket.on('updateNote', function(data) {
+		socket.broadcast.emit('onNoteUpdated', data);
+	});
+
 	socket.on('deleteNote',function (data) {
 		 socket.broadcast.emit('onNoteDeleted',data);
 	})
 
 });
 
-http.listen(3000, function() {
-    console.log('listening on port :3000');
+http.listen(4000, function() {
+    console.log('listening on port :4000');
 });

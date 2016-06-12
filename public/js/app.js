@@ -1,9 +1,9 @@
 angular.module('app', [])
 .controller('mainCtrl',mainCtrl);
 
-function mainCtrl ($scope,socketFactory) {
+function mainCtrl (socketFactory) {
 	 var vm = this;
-
+	 vm.fuck = 10;
 	 vm.notes = [];
 
 	 // this is incoming
@@ -43,7 +43,7 @@ function mainCtrl ($scope,socketFactory) {
 	 	 vm.notes = newNotes;
 	 }
 
-mainCtrl.$inject = ['$scope', 'socketFactory'];
+mainCtrl.$inject = ['socketFactory'];
 
 }
 
